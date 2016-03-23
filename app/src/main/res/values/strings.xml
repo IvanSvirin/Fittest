@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fittest</string>
+    <string name="download">Загрузить</string>
+    <string name="dialog_loading">Загрузка</string>
+</resources>
