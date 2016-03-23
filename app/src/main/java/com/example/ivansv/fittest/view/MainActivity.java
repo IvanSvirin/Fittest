@@ -1,6 +1,7 @@
 package com.example.ivansv.fittest.view;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements DataResultReceive
             downloadButton.setVisibility(View.INVISIBLE);
         }
     }
-
     public void download(View view) {
         downloadButton.setVisibility(View.INVISIBLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         dataResultReceiver = new DataResultReceiver(new Handler());
         dataResultReceiver.setReceiver(this);
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements DataResultReceive
 
     @Override
     public void onReceiveResult(int resultCode, Bundle data) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         alertDialog.cancel();
         datums = data.getParcelableArrayList(RequestHandler.DATA_LIST);
 
