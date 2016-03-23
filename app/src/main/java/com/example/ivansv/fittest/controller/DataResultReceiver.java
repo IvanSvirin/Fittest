@@ -1,4 +1,4 @@
-package com.example.ivansv.fittest;
+package com.example.ivansv.fittest.controller;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

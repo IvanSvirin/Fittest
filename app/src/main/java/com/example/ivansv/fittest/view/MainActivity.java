@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.ivansv.fittest.DataResultReceiver;
 import com.example.ivansv.fittest.R;
 import com.example.ivansv.fittest.background.RequestHandler;
+import com.example.ivansv.fittest.controller.DataResultReceiver;
 import com.example.ivansv.fittest.model.Datum;
 
 import java.util.ArrayList;
@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity implements DataResultReceive
         AlertDialog.Builder builder = new AlertDialog.Builder(wrapper);
         LayoutInflater inflater = this.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.loading_dialog, null))
-        .create();
+                .create();
         alertDialog = builder.show();
     }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle data) {
-        alertDialog.dismiss();
+        alertDialog.cancel();
         datums = data.getParcelableArrayList(RequestHandler.DATA_LIST);
 
         getSupportFragmentManager().beginTransaction()

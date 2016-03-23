@@ -11,10 +11,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.os.ResultReceiver;
 
-import com.example.ivansv.fittest.DataResultReceiver;
+import com.example.ivansv.fittest.controller.DataResultReceiver;
 import com.example.ivansv.fittest.model.DataList;
 import com.example.ivansv.fittest.model.Datum;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -58,13 +59,19 @@ public class RequestHandler extends IntentService {
                 String subPath;
                 count = dataList.size();
                 for (Datum data : dataList) {
-                    DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse("https://i.ytimg.com/vi/" +
-                            data.getV() + "/mqdefault.jpg"));
                     subPath = data.getV() + ".jpg";
-                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, subPath);
-                    downloadManager.enqueue(request);
-                    count--;
+                    File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + subPath);
+                    if (!file.exists()) {
+                        DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse("https://i.ytimg.com/vi/" +
+                                data.getV() + "/mqdefault.jpg"));
+                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, subPath);
+                        downloadManager.enqueue(request);
+                        count--;
+                    } else {
+                        getApplicationContext().registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+                        sendResult();
+                    }
                 }
             }
 

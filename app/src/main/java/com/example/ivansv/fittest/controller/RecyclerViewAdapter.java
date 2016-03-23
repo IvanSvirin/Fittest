@@ -1,4 +1,4 @@
-package com.example.ivansv.fittest;
+package com.example.ivansv.fittest.controller;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ivansv.fittest.R;
 import com.example.ivansv.fittest.model.Datum;
 import com.example.ivansv.fittest.view.ListFragment;
 

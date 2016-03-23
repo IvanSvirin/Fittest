@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ivansv.fittest.R;
-import com.example.ivansv.fittest.RecyclerViewAdapter;
+import com.example.ivansv.fittest.controller.RecyclerViewAdapter;
 import com.example.ivansv.fittest.model.Datum;
 
 public class ListFragment extends Fragment {
